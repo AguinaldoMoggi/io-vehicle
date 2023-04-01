@@ -22,7 +22,12 @@ public class ColaboradorController {
     @GetMapping
     public ResponseEntity<List<Colaborador>> getAllColaboradores(){
         return ResponseEntity.ok().body(colaboradorService.getAllColaborador());
+    }
 
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Colaborador> update(@PathVariable Long id, @RequestBody Colaborador colaborador){
+        return  ResponseEntity.ok().body(colaboradorService.update(id, colaborador));
     }
 
 }
