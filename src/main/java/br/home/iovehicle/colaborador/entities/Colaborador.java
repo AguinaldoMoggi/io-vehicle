@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.util.List;
+
 
 @Entity
 @Data
@@ -17,6 +19,8 @@ public class Colaborador implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nomeCompleto;
+
+    private Boolean funcionarioAtivo = Boolean.TRUE;
 
     private String dataNascimento;
 
@@ -35,4 +39,8 @@ public class Colaborador implements Serializable {
 
     @OneToOne(cascade = CascadeType.PERSIST)
     private CNH cnh;
+
+    @OneToMany(mappedBy = "colaborador", cascade = {CascadeType.ALL})
+    private List<Servico> servicos;
 }
+

@@ -6,28 +6,25 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class CNH implements Serializable {
-
+public class Veiculo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    private String carName;
 
-    private Long idColaborador;
+    private String modelo;
 
-    private String numeroRegistro;
+    private String carPlaca;
 
-    @Enumerated(EnumType.STRING)
-    private Categoria categoria;
+    private String renavam;
 
-    private Boolean transportePassageiros;
-
-    private LocalDateTime dataValidade;
-
+    @OneToMany(mappedBy = "veiculo", cascade = {CascadeType.ALL})
+    private List<Servico> servicos;
 
 }

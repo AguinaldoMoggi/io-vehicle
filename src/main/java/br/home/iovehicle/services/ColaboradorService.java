@@ -4,14 +4,12 @@ import br.home.iovehicle.colaborador.entities.CNH;
 import br.home.iovehicle.colaborador.entities.Colaborador;
 import br.home.iovehicle.repositories.CnhRepository;
 import br.home.iovehicle.repositories.ColaboradorRepository;
-import br.home.iovehicle.repositories.CnhRepository;
-import br.home.iovehicle.repositories.ColaboradorRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
-import org.springframework.util.SerializationUtils;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,8 +18,17 @@ public class ColaboradorService {
     private final ColaboradorRepository colaboradorRepository;
     private final CnhRepository cnhRepository;
 
-    public List<Colaborador> getAllColaborador(){
-        return colaboradorRepository.findAll();
+    public List<Colaborador> findAll(){
+        Colaborador colaborador = new Colaborador();
+        if (colaborador.getFuncionarioAtivo()){
+            return colaboradorRepository.findByFuncionarioAtivo(Boolean.TRUE);
+        }
+        return null;
+    }
+
+    public Colaborador findById(Long id){
+        Colaborador colaboradorEncontrado = colaboradorRepository.findById(id).get();
+        return colaboradorEncontrado;
     }
 
     public Colaborador create(Colaborador colaborador1){
@@ -45,4 +52,18 @@ public class ColaboradorService {
         return colaboradorRepository.save(colaboradorEncontrado);
     }
 
+    public Colaborador delete(Colaborador colaborador){
+        Optional<Colaborador> colaboradorOptional = colaboradorRepository.findById((colaborador).getId());
+        if (colaboradorOptional.isPresent()){
+            Colaborador colaborador1 = colaboradorOptional.get();
+            colaboradorRepository.delete(colaborador1);
+            cnhRepository.delete(colaborador1.getCnh());
+            return colaborador1;
+        }
+        return null;
+    }
+
+    public List<Colaborador> findByNomeCompleto(String nomeCompleto){
+        return colaboradorRepository.findByNomeCompleto(nomeCompleto);
+    }
 }
