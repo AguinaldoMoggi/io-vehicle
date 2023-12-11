@@ -3,10 +3,9 @@ package br.home.iovehicle.services;
 
 import br.home.iovehicle.colaborador.entities.CNH;
 import br.home.iovehicle.repositories.CnhRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,7 +18,8 @@ public class CnhService {
         return cnhRepository.save(cnh);
     }
 
-    public List<CNH> findByCNH (String numeroRegistro){
-        return cnhRepository.findAllBynumeroRegistro(numeroRegistro);
+    public CNH findByNumeroRegistro(String numeroRegistro){
+        return cnhRepository.findByNumeroRegistro(numeroRegistro).orElseThrow(()->
+                new EntityNotFoundException("Não achei prora nenhuma de CNH com esse numerod e registro: "+numeroRegistro));
     }
 }

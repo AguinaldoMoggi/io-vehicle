@@ -1,5 +1,6 @@
 package br.home.iovehicle.controller;
 
+import br.home.iovehicle.DTOS.VeiculoDTO;
 import br.home.iovehicle.colaborador.entities.Colaborador;
 import br.home.iovehicle.colaborador.entities.Veiculo;
 import br.home.iovehicle.services.VeiculoService;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/veiculo")
+@RequestMapping("/veiculos")
 public class VeiculoController {
 
     private final VeiculoService veiculoService;
@@ -24,7 +25,7 @@ public class VeiculoController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Veiculo>> findAll(){
+    public ResponseEntity<List<VeiculoDTO>> findAll(){
         return ResponseEntity.ok().body(veiculoService.findAll());
     }
 

@@ -1,11 +1,15 @@
 package br.home.iovehicle.colaborador.entities;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -27,7 +31,7 @@ public class CNH implements Serializable {
 
     private Boolean transportePassageiros;
 
-    private LocalDateTime dataValidade;
-
+    @JsonFormat(pattern = "dd-MM-yyyy")
+    private LocalDate dataValidade;
 
 }

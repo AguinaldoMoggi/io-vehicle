@@ -11,4 +11,6 @@ public class IoVehicleApplication {
 		SpringApplication.run(IoVehicleApplication.class, args);
 	}
 
+
+
 }

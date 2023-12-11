@@ -10,6 +10,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ServicoDTO {
+
     private Long id;
 
     private ColaboradorDTO colaborador;
@@ -17,4 +18,8 @@ public class ServicoDTO {
     private VeiculoDTO veiculo;
 
     private LocalDateTime registroDeSaida;
+
+    private LocalDateTime registroDeEntrada;
+
+    private Boolean concluido;
 }

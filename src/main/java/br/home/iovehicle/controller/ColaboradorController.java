@@ -3,6 +3,7 @@ package br.home.iovehicle.controller;
 import br.home.iovehicle.DTOS.ColaboradorDTO;
 import br.home.iovehicle.colaborador.entities.Colaborador;
 import br.home.iovehicle.services.ColaboradorService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.ResponseEntity;
@@ -13,19 +14,16 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/colaboradores")
+@RequiredArgsConstructor
 @Slf4j
 public class ColaboradorController {
-    private final ColaboradorService colaboradorService;
-    
-    private ModelMapper modelMapper;
 
-    public ColaboradorController(ColaboradorService colaboradorService, ModelMapper modelMapper) {
-        this.colaboradorService = colaboradorService;
-        this.modelMapper = modelMapper;
-    }
+    private final ColaboradorService colaboradorService;
+    private final ModelMapper modelMapper;
 
     @PostMapping
     public ResponseEntity<Colaborador> create(@RequestBody Colaborador colaborador){
+        log.info(colaborador.toString());
         return ResponseEntity.ok().body(colaboradorService.create(colaborador));
     }
     @GetMapping

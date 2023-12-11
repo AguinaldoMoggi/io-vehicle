@@ -2,8 +2,10 @@ package br.home.iovehicle.services;
 
 import br.home.iovehicle.colaborador.entities.CNH;
 import br.home.iovehicle.colaborador.entities.Colaborador;
+import br.home.iovehicle.colaborador.entities.Servico;
 import br.home.iovehicle.repositories.CnhRepository;
 import br.home.iovehicle.repositories.ColaboradorRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -27,11 +29,10 @@ public class ColaboradorService {
     }
 
     public Colaborador findById(Long id){
-        Colaborador colaboradorEncontrado = colaboradorRepository.findById(id).get();
-        return colaboradorEncontrado;
+        return colaboradorRepository.findById(id).orElseThrow(()-> new EntityNotFoundException("Colaborador Não Encontrado com o id: " + id));
     }
-
     public Colaborador create(Colaborador colaborador1){
+        log.info(colaborador1);
         if (colaborador1.getCnh() == null){
             return colaboradorRepository.save(colaborador1);
         }
@@ -44,6 +45,12 @@ public class ColaboradorService {
         return colaboradorRepository.save(colaboradorSaved);
     }
 
+    public void addServico(Long idColaborador, Servico servico){
+        Colaborador colaboradorFound = findById(idColaborador);
+
+        colaboradorFound.getServicos().add(servico);
+        colaboradorRepository.save(colaboradorFound);
+    }
     public Colaborador update(Long id, Colaborador colaborador) {
         Colaborador colaboradorEncontrado = colaboradorRepository.findById(id).get();
         colaboradorEncontrado.setNomeCompleto(colaborador.getNomeCompleto());

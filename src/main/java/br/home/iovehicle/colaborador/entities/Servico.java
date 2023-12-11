@@ -27,6 +27,15 @@ public class Servico {
 
     private LocalDateTime registroDeSaida;
 
+    private LocalDateTime registroDeEntrada;
+
+    private Boolean concluido = Boolean.FALSE;
+
+    private Boolean emRota = Boolean.FALSE;
+
+    private StatusDeTroca situacaoDeTroca;
+
+
     @PrePersist
     public void create(){
         registroDeSaida = LocalDateTime.now();

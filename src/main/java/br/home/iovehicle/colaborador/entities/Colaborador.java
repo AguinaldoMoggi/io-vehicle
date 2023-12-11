@@ -1,5 +1,7 @@
 package br.home.iovehicle.colaborador.entities;
 
+import com.fasterxml.jackson.annotation.JsonEnumDefaultValue;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,5 +44,11 @@ public class Colaborador implements Serializable {
 
     @OneToMany(mappedBy = "colaborador", cascade = {CascadeType.ALL})
     private List<Servico> servicos;
+
+    private Boolean emRota;
+
+    @Enumerated(EnumType.STRING)
+    private DisponibilidadeColaborador disponibilidadeColaborador;
+
 }
 

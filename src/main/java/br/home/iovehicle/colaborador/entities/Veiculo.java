@@ -27,4 +27,6 @@ public class Veiculo implements Serializable {
     @OneToMany(mappedBy = "veiculo", cascade = {CascadeType.ALL})
     private List<Servico> servicos;
 
+    private DisponibilidadeVeiculo disponibilidadeVeiculo;
+
 }

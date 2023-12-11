@@ -19,9 +19,9 @@ public class ColaboradorDTO {
     private Long id;
     private String nomeCompleto;
 
-    private Boolean funcionarioAtivo = Boolean.TRUE;
+    private Boolean funcionarioAtivo;
 
     private String profissao;
 
-    private List<Colaborador> colaborador;
+    private List<ServicoDTO> colaborador;
 }
